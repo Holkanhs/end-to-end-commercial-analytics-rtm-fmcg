@@ -1,0 +1,27 @@
+flowchart LR
+    raw["sales_data_raw<br/><i>Snowflake · raw</i>"]:::bronze --> stg
+
+    subgraph BRONZE [" Bronze · staging "]
+        stg["stg_sales_data<br/><i>typecast · round · coalesce</i>"]:::bronze
+    end
+
+    subgraph SILVER [" Silver · intermediate "]
+        int["int_route_performance<br/><i>gender fix · loyalty label<br/>profit_segment · avg_ticket</i>"]:::silver
+    end
+
+    subgraph GOLD [" Gold · marts "]
+        dc["dim_customers<br/><i>288 rows</i>"]:::gold
+        dp["dim_products<br/><i>64 rows</i>"]:::gold
+        dl["dim_locations<br/><i>72 rows</i>"]:::gold
+        fs["fct_sales<br/><i>100,000 rows</i>"]:::gold
+    end
+
+    stg --> int
+    int --> dc
+    int --> dp
+    int --> dl
+    int --> fs
+
+    classDef bronze fill:#CD7F32,stroke:#8B4513,color:#fff
+    classDef silver fill:#C0C0C0,stroke:#808080,color:#000
+    classDef gold   fill:#FFD700,stroke:#B8860B,color:#000

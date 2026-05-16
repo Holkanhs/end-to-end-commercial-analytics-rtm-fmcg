@@ -1,0 +1,27 @@
+flowchart LR
+    subgraph S1 [" 1. Snowflake "]
+        raw["sales_data_raw<br/><i>100k rows</i>"]:::raw
+    end
+
+    subgraph S2 [" 2. dbt — Bronze to Gold "]
+        stg["stg_sales_data<br/><i>Bronze</i>"]:::bronze
+        int["int_route_performance<br/><i>Silver</i>"]:::silver
+        dc["dim_customers"]:::gold
+        dp["dim_products"]:::gold
+        dl["dim_locations"]:::gold
+        fs["fct_sales"]:::gold
+    end
+
+    subgraph S3 [" 3. Power BI "]
+        pbi["RTM_FINAL_PROJECT.pbix<br/><i>Star · DAX · Dashboard</i>"]:::pbi
+    end
+
+    raw --> stg --> int
+    int --> dc & dp & dl & fs
+    dc & dp & dl & fs --> pbi
+
+    classDef raw    fill:#29B5E8,stroke:#1A7BAB,color:#fff
+    classDef bronze fill:#CD7F32,stroke:#8B4513,color:#fff
+    classDef silver fill:#C0C0C0,stroke:#808080,color:#000
+    classDef gold   fill:#FFD700,stroke:#B8860B,color:#000
+    classDef pbi    fill:#F2C811,stroke:#B8950A,color:#000

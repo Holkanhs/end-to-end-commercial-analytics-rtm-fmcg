@@ -1,0 +1,64 @@
+erDiagram
+    fct_sales {
+        text customers_key FK
+        text product_key FK
+        text location_key FK
+        int invoice_id
+        date invoice_date FK
+        int units
+        number revenue
+        number cost
+        number margin
+        number margin_pct
+        number avg_ticket_price
+        text profit_segment
+        text payment_mode
+    }
+    dim_customers {
+        text customers_key PK
+        int customer_age
+        text customer_gender
+        text loyalty_status
+    }
+    dim_products {
+        text product_key PK
+        text brand
+        text category
+        number cost_price
+        number selling_price
+        int stock_on_hand
+        int reorder_level
+        number lead_time_days
+    }
+    dim_locations {
+        text location_key PK
+        text city
+        text channel
+        text store_format
+    }
+    Dim_Date {
+        date Date PK
+        int Year
+        text Quarter
+        int MonthNo
+        text MonthName
+        text YearMonth
+        int DayOfWeek
+        boolean IsWeekend
+    }
+    Tabla_Rutas_CTS {
+        text RouteID_Corto PK
+        text city
+        text channel
+        text store_format
+        number revenue
+        number cost
+        number cts_index
+        text segmento_cts
+    }
+
+    fct_sales }o--|| dim_customers   : "customers_key"
+    fct_sales }o--|| dim_products    : "product_key"
+    fct_sales }o--|| dim_locations   : "location_key"
+    fct_sales }o--|| Dim_Date        : "invoice_date"
+    fct_sales }o--|| Tabla_Rutas_CTS : "RouteID Corto"

@@ -1,0 +1,18 @@
+# dbt profile template for Snowflake.
+# Copy this to ~/.dbt/profiles.yml (NOT into the repo) and fill in your credentials.
+# dbt_project.yml references the profile name `default`.
+
+default:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') }}"
+      database: "{{ env_var('SNOWFLAKE_DATABASE', 'FMCG_RTM') }}"
+      schema: "{{ env_var('SNOWFLAKE_SCHEMA', 'raw') }}"
+      threads: 4
+      client_session_keep_alive: false

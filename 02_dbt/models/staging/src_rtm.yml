@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: raw_data  # Este es el nombre que dbt buscará en la función {{ source() }}
+    database: FMCG_RTM  # El nombre de tu DB en Snowflake
+    schema: RAW_DATA    # El esquema que vimos en tus imágenes
+    tables:
+      - name: sales_data_raw  # El nombre exacto de la tabla que subiste

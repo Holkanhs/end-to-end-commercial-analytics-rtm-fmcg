@@ -1,0 +1,32 @@
+# dbt build artifacts
+02_dbt/target/
+02_dbt/dbt_packages/
+02_dbt/dbt_internal_packages/
+02_dbt/logs/
+
+# regenerable BI export (large; rebuild via scripts/build_powerbi_data.py)
+03_powerbi/data/*.csv
+
+# local databases
+*.duckdb
+
+# secrets — never commit
+.env
+.env.local
+profiles.yml
+*.user.yml
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# runtime logs (regenerable)
+logs/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
